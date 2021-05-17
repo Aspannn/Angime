@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="kz.aspan.angime.ui.fragments.LoginFragment"
+        android:name="kz.aspan.angime.ui.auth.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="kz.aspan.angime.ui.fragments.RegisterFragment"
+        android:name="kz.aspan.angime.ui.auth.fragments.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
