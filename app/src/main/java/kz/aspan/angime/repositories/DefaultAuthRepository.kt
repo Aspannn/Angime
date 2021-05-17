@@ -12,8 +12,8 @@ import kz.aspan.angime.other.safeCall
 
 class DefaultAuthRepository : AuthRepository {
 
-    val auth = FirebaseAuth.getInstance();
-    val users = FirebaseFirestore.getInstance().collection("users")
+    private val auth = FirebaseAuth.getInstance();
+    private val users = FirebaseFirestore.getInstance().collection("users")
 
     override suspend fun register(
         email: String,
@@ -32,6 +32,11 @@ class DefaultAuthRepository : AuthRepository {
     }
 
     override suspend fun login(email: String, password: String): Resource<AuthResult> {
-        TODO("Not yet implemented")
+        return withContext(Dispatchers.IO) {
+            safeCall {
+                val result = auth.signInWithEmailAndPassword(email, password).await()
+                Resource.Success(result)
+            }
+        }
     }
 }
