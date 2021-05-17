@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 import kz.aspan.angime.R
 import kz.aspan.angime.other.EventObserver
@@ -14,22 +15,23 @@ import kz.aspan.angime.ui.auth.AuthViewModel
 import kz.aspan.angime.ui.main.MainActivity
 import kz.aspan.angime.ui.snackbar
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private lateinit var viewModel: AuthViewModel
+//    private lateinit var viewModel: AuthViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(AuthViewModel::class.java)
-        subscribeToObservers()
-
-        btnLogin.setOnClickListener {
-            viewModel.login(
-                etEmail.text.toString(),
-                etPassword.text.toString()
-            )
-        }
+//        viewModel = ViewModelProvider(requireActivity()).get(AuthViewModel::class.java)
+//        subscribeToObservers()
+//
+//        btnLogin.setOnClickListener {
+//            viewModel.login(
+//                etEmail.text.toString(),
+//                etPassword.text.toString()
+//            )
+//        }
 
         tvRegisterNewAccount.setOnClickListener {
             if (findNavController().previousBackStackEntry != null) {
@@ -41,22 +43,22 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
 
-    private fun subscribeToObservers() {
-        viewModel.loginStatus.observe(
-            viewLifecycleOwner, EventObserver(
-                onError = {
-                    loginProgressBar.isVisible = false
-                    snackbar(it)
-                },
-                onLoading = { loginProgressBar.isVisible = true }
-            ) {
-                loginProgressBar.isVisible = false
-                Intent(requireContext(), MainActivity::class.java).also {
-                    startActivity(it)
-                    requireActivity().finish()
-                }
-            }
-        )
-    }
+//    private fun subscribeToObservers() {
+//        viewModel.loginStatus.observe(
+//            viewLifecycleOwner, EventObserver(
+//                onError = {
+//                    loginProgressBar.isVisible = false
+//                    snackbar(it)
+//                },
+//                onLoading = { loginProgressBar.isVisible = true }
+//            ) {
+//                loginProgressBar.isVisible = false
+//                Intent(requireContext(), MainActivity::class.java).also {
+//                    startActivity(it)
+//                    requireActivity().finish()
+//                }
+//            }
+//        )
+//    }
 
 }
